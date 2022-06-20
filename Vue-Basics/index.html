@@ -1,0 +1,104 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vue Demo</title>
+        <script src="https://unpkg.com/vue@3"></script>
+    </head>
+
+    <body>
+
+        <style>
+            .box {
+                height: 240px;
+                width: 340px;
+                background-color: gray;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .favBook {
+                background-color: pink;
+            }
+        </style>
+
+        <div id="app">
+            <!-- onclick Event -->
+            {{ title }} - {{ count }}
+            <button v-on:click='count++'>Increase Count</button>
+            <!-- instead of wtitting v-on: -> Shotcut foo events is @  -->
+            <button @click="changeTitle('blabal')">Change Title</button>
+
+            <!-- Conditional Statments v-if -->
+            <div v-if="showBooks">
+                Bookss!
+                v-show uses css to hide itself but if u inspect, its till there in
+                our html,<br />
+                however if we use v-if then in injects/remvoves that element
+                and if v-if evaluates to false then u cant see under inspect too!
+            </div>
+            <div>
+                <button @click="toggleShowBooks">
+                    <span v-if="showBooks">Hide</span>
+                    <span v-else>Show</span>
+                    Books
+                </button>
+            </div>
+            <!-- v-show -->
+            <div v-show="showBooks">Books are visible</div>
+            <!-- More Events -->
+            <div @contextmenu="handleEvent($event, 5)">hiiii bro</div>
+            <div class="box" @mousemove="handleMouseMove">position - {{ X }} {{ Y }}</div>
+            <!-- v-for -->
+            <div v-if="showBooks">
+                <ul>
+                    <li v-for="book in books">
+                        {{ book.title }} - {{ book.price }}
+                    </li>
+                </ul>
+            </div>
+            <!-- Attribute Binding -->
+            <div>
+                On Clicking this link you will be glad :
+                <a v-bind:href="url">Best Website Ever</a>
+                <!-- Shortcut for v-bind is only colon symbol that is-> : -->
+                <br />
+                <a :href="url">Best Website Ever link2</a>
+            </div>
+
+            <!-- dynamic classes -->
+            <div v-if="showBooks">
+                <ul>
+                    <!-- here in this example favBook is class name given dynmaically as [er the value of fav -->
+                    <li v-for="book in books" :class="{ favBook: book.fav }" @click="toggleFav(book.id)">
+                        {{ book.title }} - {{ book.price }}
+                    </li>
+                </ul>
+            </div>
+
+            <!--
+                Computed Properties : its a way to define data properties that depeneds on other data. 
+                A computed property will only re-evaluate when some of its reactive dependencies have changed.
+                This means as long as books has not changed, multiple access to filteredBooks
+                will immediately return the previously computed result without having to run the getter function again.
+            -->
+            <div v-if="showBooks">
+                <ul>
+                    <!-- here in this example favBook is class name given dynmaically as [er the value of fav -->
+                    <li v-for="book in filteredBooks">
+                        {{ book.title }} - {{ book.price }} 
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <script src="app.js"></script>
+    </body>
+
+    </html>

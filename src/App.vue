@@ -1,17 +1,28 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h3>{{ title }}</h3>
+    <input type="text" ref="name" />
+    <button @click="clickHandler">click me</button>
+    <Modal />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Modal from "./components/Modal.vue";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  components: { Modal },
+  data() {
+    return {
+      title: "My first Vue Project!",
+    };
+  },
+  methods: {
+    clickHandler(e) {
+      e.preventDefault();
+      // console.log(this.$refs.name.value);
+    },
+  },
+};
 </script>
 
 <style>
