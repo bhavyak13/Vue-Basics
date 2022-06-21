@@ -36,7 +36,11 @@
 
             <!-- Conditional Statments v-if -->
             <div v-if="showBooks">
+                Here, the v-if directive would remove / insert the 'div' element based on the truthiness of the value of
+                the expression showBooks
+                -------
                 Bookss!
+                -------
                 v-show uses css to hide itself but if u inspect, its till there in
                 our html,<br />
                 however if we use v-if then in injects/remvoves that element
@@ -91,7 +95,7 @@
                 <ul>
                     <!-- here in this example favBook is class name given dynmaically as [er the value of fav -->
                     <li v-for="book in filteredBooks">
-                        {{ book.title }} - {{ book.price }} 
+                        {{ book.title }} - {{ book.price }}
                     </li>
                 </ul>
             </div>
