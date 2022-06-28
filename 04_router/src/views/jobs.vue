@@ -12,12 +12,14 @@
 export default {
   data() {
     return {
-      jobs: [
-        { id: "1", name: "job1" },
-        { id: "2", name: "job2" },
-        { id: "3", name: "job3" },
-      ],
+      jobs: [],
     };
+  },
+  async mounted() {
+    const response = await fetch("http://localhost:3000/jobs");
+    const data = await response.json();
+    this.jobs = data;
+    console.log(data);
   },
 };
 </script>
